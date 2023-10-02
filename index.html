@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <!-- <script src="script.js"></script> -->
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .registration-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 300px; /* Increase the width of the container */
+            text-align: center;
+        }
+
+        .registration-form h2 {
+            color: #333;
+        }
+
+        .registration-form input[type="text"],
+        .registration-form input[type="email"],
+        .registration-form input[type="password"],
+        .registration-form input[type="tel"] {
+            width: 85%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            padding-right: 30px;
+        }
+
+        .registration-form button[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+    </style>
+    
+    
+</head>
+<body>
+    <div class="registration-form">
+        <h2>Registration</h2>
+        <form id="register-form">
+            <input type="text" name="full_name" placeholder="Full Name" required>
+
+            <input type="email" name="email" placeholder="Email" required>
+
+            <input id="mobile-button" oninput="validateNumber(this)" type="tel" name="mobile" placeholder="Mobile Number"  required>
+            
+            <input id="password-button" oninput="validatePassword(this)" type="password" name="password" placeholder="Password" required>
+            
+            <!-- Add more input fields as needed -->
+            <button type="submit">Register Now</button>
+        </form>
+    </div>
+</body>
+<script>
+function validateNumber(inputField) {
+    const numberValue = inputField.value.trim();
+    
+    if (!/^\d{10}$/.test(numberValue)) {
+        inputField.setCustomValidity('Enter exactly 10 numbers.');
+    } else {
+        inputField.setCustomValidity(''); // Clear custom validity
+    }
+}
+
+    function validatePassword(inputField) {
+        const passwordValue = inputField.value.trim();
+        
+        // Define regular expressions for each requirement
+        const hasUpperCase = /[A-Z]/.test(passwordValue);
+        const hasLowerCase = /[a-z]/.test(passwordValue);
+        const hasNumber = /\d/.test(passwordValue);
+
+        if (!hasUpperCase || !hasLowerCase || !hasNumber) {
+            inputField.setCustomValidity('Password must meet all of the following criteria:\n' +
+                '- At least one uppercase letter\n' +
+                '- At least one lowercase letter\n' +
+                '- At least one number');
+        } else {
+            inputField.setCustomValidity(''); // Clear custom validity
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.querySelector('#register-form');
+    
+        form.addEventListener('submit', (event) => {
+            if (!form.checkValidity()) {
+                event.preventDefault(); // Prevent form submission if there are validation errors
+            } else {
+                alert('Registered successfully!'); // Display a success message if there are no errors
+            }
+        });
+    });
+    
+
+
+
+</script>
+</html>
